@@ -16,6 +16,10 @@
 
 package com.example.bot.spring.echo;
 
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -35,8 +39,10 @@ public class EchoApplication {
 
     @EventMapping
     public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         System.out.println("event: " + event);
-        return new TextMessage(event.getMessage().getText());
+        return new TextMessage(sdf.format(cal.getTime())+"->"+event.getMessage().getText());
     }
 
     @EventMapping
